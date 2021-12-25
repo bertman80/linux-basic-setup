@@ -6,7 +6,7 @@ Make a githun basic dir<br>
 <code>sudo su apt install git</code><br>
 <code>cd /dev/github</code><br>
 <code>git clone https://github.com/bertman80/linux-basic-setup.git</code><br>
-<code>cd linux-basic-setup/code><br>
+<code>cd linux-basic-setup</code><br>
 <code>./install.sh</code><br>
 <code>exit</code><br>
 <br>
