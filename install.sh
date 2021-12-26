@@ -30,9 +30,6 @@ case $answer in
     echo "Press any key to continue"
     while [ true ] ; do
       read -t 3 -n 1
-      if [ $? = 0 ] ; then
-        exit ;
-      fi
     done
 
     nano zabbix.sql
@@ -43,9 +40,7 @@ case $answer in
     echo "Press any key to continue"
     while [ true ] ; do
       read -t 3 -n 1
-      if [ $? = 0 ] ; then
-        exit ;
-      fi
+    fi
     done
     nano /etc/zabbix/zabbix_server.conf
     
@@ -54,20 +49,15 @@ case $answer in
     echo "Press any key to continue"
     while [ true ] ; do
       read -t 3 -n 1
-      if [ $? = 0 ] ; then
-        exit ;
-      fi
-    done
-    nano /etc/zabbix/apache.conf
+    fi
+    done    nano /etc/zabbix/apache.conf
 
     echo "adjust timezone in php.ini"
     echo "date.timezone = Europe/Amsterdam"
     echo "Press any key to continue"
     while [ true ] ; do
       read -t 3 -n 1
-      if [ $? = 0 ] ; then
-        exit ;
-      fi
+    fi
     done
     nano /etc/php/7.3/apache2/php.ini
     date.timezone = Europe/Amsterdam
