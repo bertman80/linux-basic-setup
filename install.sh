@@ -34,7 +34,7 @@ case $answer in
     echo "Enter password for creating database and user"
     mysql -uroot -p < zabbix.sql
 
-    echo "Enter password for importing basic SQL filem this may take a while!"  
+    echo "Enter password for importing basic SQL filem this may take a while!"
     zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix
     
     echo "adjust password in zabbix file"
@@ -69,6 +69,12 @@ case $answer in
     ;;
 esac
 
+echo "to improve performance, we stop the zabbix-agent en server (these will automaticly start when linux is started)"
+echo "the website is still running and you can do youre config, but tasks will not be executed at this time"
+service zabbix-server stop
+service zabbix-agent stop
+
+echo "You can get some access denied. You can ignore them"
 updatedb
 
 
