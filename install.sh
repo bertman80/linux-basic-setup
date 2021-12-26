@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo "What do you want to install, this are te options"<br>
-echo "basic"<br>
-echo "zabbix"<br><br>
-echo -n "What do you want to install: "<br>
-read answer<br>
-case $answer in<br>
+echo "What do you want to install, this are te options"
+echo "basic"
+echo "zabbix"
+echo -n "What do you want to install: "
+read answer
+case $answer in
   basic)
-    echo -n "Install basics"<br>
+    echo -n "Install basics"
     # install most handy tools
     echo "Installing: basic packages"
     apt install -y $(awk '{print $1'} packages-linux-basic.txt)
@@ -18,7 +18,7 @@ case $answer in<br>
     ;;
 
   zabbix)
-    echo -n "Install Zabbix"<br>
+    echo -n "Install Zabbix"
     wget https://repo.zabbix.com/zabbix/5.0/debian/pool/main/z/zabbix-release/zabbix-release_5.0-1+buster_all.deb -O /tmp/zabbix.deb
     dpkg -i zabbix.deb
     apt update
@@ -55,7 +55,7 @@ case $answer in<br>
     ;;
 
   *)
-    echo -n "unknown"<br>
+    echo -n "unknown"
     ;;
 esac
 
