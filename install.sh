@@ -48,7 +48,8 @@ case $answer in
     echo "Press any key to continue"
     while [ true ] ; do
       read -t 3 -n 1
-    done    nano /etc/zabbix/apache.conf
+    done    
+    nano /etc/zabbix/apache.conf
 
     echo "adjust timezone in php.ini"
     echo "date.timezone = Europe/Amsterdam"
