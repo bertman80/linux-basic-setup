@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "What do you want to install, this are te options"<br>
 echo "basic"<br>
 echo "zabbix"<br><br>
@@ -8,7 +10,7 @@ case $answer in<br>
     echo -n "Install basics"<br>
     # install most handy tools
     echo "Installing: basic packages"
-    apt install -y $(awk '{print $1'} linux-basic-setup-packages.txt)
+    apt install -y $(awk '{print $1'} packages-linux-basic.txt)
     apt -y install python3-pip
     pip3 install BeautifulSoup4
     pip3 install pandas
@@ -20,7 +22,36 @@ case $answer in<br>
     wget https://repo.zabbix.com/zabbix/5.0/debian/pool/main/z/zabbix-release/zabbix-release_5.0-1+buster_all.deb -O /tmp/zabbix.deb
     dpkg -i zabbix.deb
     apt update
-    apt install -y $(awk '{print $1'} linux-zabbix-packages.txt)
+    apt install -y $(awk '{print $1'} packages-zabbix.txt)
+    
+    echo "zabbix ALL=NOPASSWD: /usr/bin/nmap" >> /etc/sudoers
+    echo "adjust password in sql file"
+    echo -n "Press Enter to op the file"
+    nano zabbix.sql
+    zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix
+    
+    echo "adjust password in zabbix file"
+    echo "DBPassword=PASSWORD"
+    echo -n "Press Enter to op the file"
+    nano /etc/zabbix/zabbix_server.conf
+    
+    echo "adjust timezone in zabbix file"
+    echo "php_value date.timezone Europe/Amsterdam"    
+    echo -n "Press Enter to op the file"
+    nano /etc/zabbix/apache.conf
+
+    echo "adjust timezone in php.imi"
+    echo "date.timezone = Europe/Amsterdam 
+    echo -n "Press Enter to op the file"
+    nano /etc/php/7.3/apache2/php.ini
+    date.timezone = Europe/Amsterdam
+
+    systemctl restart zabbix-server zabbix-agent apache2
+    systemctl enable zabbix-server zabbix-agent apache2
+    
+    echo "you can now logon to zabbix:"
+    echo "http://penguin.linux.test/zabbix"
+    echo "Admin / zabbix"
     ;;
 
   *)
