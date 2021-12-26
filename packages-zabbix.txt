@@ -1,0 +1,9 @@
+r-base
+r-recommended
+zabbix-server-mysql
+zabbix-frontend-php 
+zabbix-agent 
+zabbix-apache-conf
+default-mysql-client 
+default-mysql-server
+php-mysql nmap
