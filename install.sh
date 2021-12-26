@@ -19,7 +19,13 @@ case $answer in
 
   zabbix)
     echo -n "Install Zabbix"
-    wget https://repo.zabbix.com/zabbix/5.0/debian/pool/main/z/zabbix-release/zabbix-release_5.0-2+debian11_all.deb -O /tmp/zabbix.deb
+    neofetch
+    echo "go to this site and give us the right install url, based on this Linux version"
+    echo "https://www.zabbix.com/download?zabbix=5.0&os_distribution=debian&os_version=11_bullseye&db=mysql&ws=ap>"
+    echo "type down here the url the you can find under 2.a. Install Zabbix repository"
+    echo "after wget, so it have to start with https://"  
+    read answer
+    wget $answer -O /tmp/zabbix.deb
     dpkg -i /tmp/zabbix.deb
     apt update
     apt install -y $(awk '{print $1'} packages-zabbix.txt)
