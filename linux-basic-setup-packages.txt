@@ -1,0 +1,8 @@
+nano
+wget
+locate
+python3
+python3-matplotlib
+htop
+r-base
+r-recommended
