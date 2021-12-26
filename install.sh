@@ -31,9 +31,10 @@ case $answer in
     read -n 1 -s
     nano zabbix.sql
 
-    echo "Enter password for importing SQL file"
+    echo "Enter password for creating database and user"
     mysql -uroot -p < zabbix.sql
-    
+
+    echo "Enter password for importing basix SQL file"  
     zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix
     
     echo "adjust password in zabbix file"
