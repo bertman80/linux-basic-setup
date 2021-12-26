@@ -1,7 +1,6 @@
 # install most handy tools
 echo "Installing: basic packages"
-#apt install /y nano wget locate python3 python3-matplotlib htop r-base r-recommended
-apt install /y linux-basic-setup-packages.txt
+apt install /y $(awk '{print $1'} linux-basic-setup-packages.txt)
 sudo apt -y install python3-pip
 sudo pip3 install BeautifulSoup4
 sudo pip3 install pandas
