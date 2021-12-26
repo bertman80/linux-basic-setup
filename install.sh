@@ -19,30 +19,56 @@ case $answer in
 
   zabbix)
     echo -n "Install Zabbix"
-    wget https://repo.zabbix.com/zabbix/5.0/debian/pool/main/z/zabbix-release/zabbix-release_5.0-1+buster_all.deb -O /tmp/zabbix.deb
-    dpkg -i zabbix.deb
+    wget https://repo.zabbix.com/zabbix/5.0/debian/pool/main/z/zabbix-release/zabbix-release_5.0-2+debian11_all.deb -O /tmp/zabbix.deb
+    dpkg -i /tmp/zabbix.deb
     apt update
     apt install -y $(awk '{print $1'} packages-zabbix.txt)
     
     echo "zabbix ALL=NOPASSWD: /usr/bin/nmap" >> /etc/sudoers
     echo "adjust password in sql file"
-    read
+        
+    echo "Press any key to continue"
+    while [ true ] ; do
+      read -t 3 -n 1
+      if [ $? = 0 ] ; then
+        exit ;
+      fi
+    done
+
     nano zabbix.sql
     zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix
     
     echo "adjust password in zabbix file"
     echo "DBPassword=PASSWORD"
-    read
+    echo "Press any key to continue"
+    while [ true ] ; do
+      read -t 3 -n 1
+      if [ $? = 0 ] ; then
+        exit ;
+      fi
+    done
     nano /etc/zabbix/zabbix_server.conf
     
     echo "adjust timezone in zabbix file"
     echo "php_value date.timezone Europe/Amsterdam"
-    read
+    echo "Press any key to continue"
+    while [ true ] ; do
+      read -t 3 -n 1
+      if [ $? = 0 ] ; then
+        exit ;
+      fi
+    done
     nano /etc/zabbix/apache.conf
 
     echo "adjust timezone in php.ini"
     echo "date.timezone = Europe/Amsterdam"
-    read
+    echo "Press any key to continue"
+    while [ true ] ; do
+      read -t 3 -n 1
+      if [ $? = 0 ] ; then
+        exit ;
+      fi
+    done
     nano /etc/php/7.3/apache2/php.ini
     date.timezone = Europe/Amsterdam
 
@@ -59,16 +85,10 @@ case $answer in
     ;;
 esac
 
+updatedb
+
 
 #echo "Install Microsoft Visual Code"
 #cd /tmp
 #wget https://code.visualstudio.com/docs/?dv=linux64_deb
 #dpkg -i zabbix-release_5.0-2+debian11_all.deb
-
-#apt update
-#apt upgrade -y
-#updatedb
-
-
-# install Zabbix 5 LTS
-#wget https://repo.zabbix.com/zabbix/5.0/debian/pool/main/z/zabbix-release/zabbix-release_5.0-1+buster_all.deb
