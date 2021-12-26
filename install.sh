@@ -28,35 +28,30 @@ case $answer in
     echo "adjust password in sql file"
         
     echo "Press any key to continue"
-    while [ true ] ; do
-      read -t 3 -n 1
-    done
-
+    read -n 1 -s
     nano zabbix.sql
+
+    echo "Enter password for importing SQL file"
+    mysql -uroot -p < zabbix.sql
+    
     zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix
     
     echo "adjust password in zabbix file"
     echo "DBPassword=PASSWORD"
     echo "Press any key to continue"
-    while [ true ] ; do
-      read -t 3 -n 1
-    done
+    read -n 1 -s
     nano /etc/zabbix/zabbix_server.conf
     
     echo "adjust timezone in zabbix file"
     echo "php_value date.timezone Europe/Amsterdam"
     echo "Press any key to continue"
-    while [ true ] ; do
-      read -t 3 -n 1
-    done    
+    read -n 1 -s
     nano /etc/zabbix/apache.conf
 
     echo "adjust timezone in php.ini"
     echo "date.timezone = Europe/Amsterdam"
     echo "Press any key to continue"
-    while [ true ] ; do
-      read -t 3 -n 1
-    done
+    read -n 1 -s
     nano /etc/php/7.3/apache2/php.ini
     date.timezone = Europe/Amsterdam
 
