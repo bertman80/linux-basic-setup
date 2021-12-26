@@ -53,7 +53,7 @@ case $answer in
     echo "date.timezone = Europe/Amsterdam"
     echo "Press any key to continue"
     read -n 1 -s
-    nano /etc/php/7.3/apache2/php.ini
+    nano /etc/php/7.4/apache2/php.ini
     date.timezone = Europe/Amsterdam
 
     systemctl restart zabbix-server zabbix-agent apache2
