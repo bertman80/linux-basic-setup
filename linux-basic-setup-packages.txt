@@ -7,4 +7,3 @@ htop
 r-base
 r-recommended
 nmap
-jq
