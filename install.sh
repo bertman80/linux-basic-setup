@@ -26,23 +26,23 @@ case $answer in
     
     echo "zabbix ALL=NOPASSWD: /usr/bin/nmap" >> /etc/sudoers
     echo "adjust password in sql file"
-    echo -n "Press Enter to op the file"
+    read "Press Enter to op the file"
     nano zabbix.sql
     zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix
     
     echo "adjust password in zabbix file"
     echo "DBPassword=PASSWORD"
-    echo -n "Press Enter to op the file"
+    read "Press Enter to op the file"
     nano /etc/zabbix/zabbix_server.conf
     
     echo "adjust timezone in zabbix file"
-    echo "php_value date.timezone Europe/Amsterdam"    
-    echo -n "Press Enter to op the file"
+    echo "php_value date.timezone Europe/Amsterdam"
+    read "Press Enter to op the file"
     nano /etc/zabbix/apache.conf
 
-    echo "adjust timezone in php.imi"
-    echo "date.timezone = Europe/Amsterdam 
-    echo -n "Press Enter to op the file"
+    echo "adjust timezone in php.ini"
+    echo "date.timezone = Europe/Amsterdam"
+    read "Press Enter to op the file"
     nano /etc/php/7.3/apache2/php.ini
     date.timezone = Europe/Amsterdam
 
