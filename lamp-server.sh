@@ -6,7 +6,7 @@ echo "### Apache WebServer Installeren ###"
 #sudo service apache2 restart
 echo "<?php phpinfo(); ?>" > /var/www/html/info.php
 
-externalip=curl ifconfig.me
-internalip=hostname -I | awk '{print $1}'
+externalip=$(curl ifconfig.me)
+internalip=$(hostname -I | awk '{print $1}')
 echo "start de webbrowser"
 echo "http://$internalip/info.php"
