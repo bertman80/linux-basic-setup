@@ -1,1 +1,4 @@
-apt install nano
+#curl -L https://raw.githubusercontent.com/bertman80/linux-basic-setup/main/lamp-server.txt | bash
+echo "### Apache WebServer Installeren ###"
+# apt-get install apache2 -y
+
