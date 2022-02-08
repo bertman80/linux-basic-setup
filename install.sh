@@ -70,15 +70,14 @@ case $answer in
     echo "Admin / zabbix"
     ;;
 
+    echo "to improve performance, we stop the zabbix-agent en server (these will automaticly start when linux is started)"
+    echo "the website is still running and you can do youre config, but tasks will not be executed at this time"
+    service zabbix-server stop
+    service zabbix-agent stop
   *)
     echo -n "unknown"
     ;;
 esac
-
-echo "to improve performance, we stop the zabbix-agent en server (these will automaticly start when linux is started)"
-echo "the website is still running and you can do youre config, but tasks will not be executed at this time"
-service zabbix-server stop
-service zabbix-agent stop
 
 echo "You can get some access denied. You can ignore them"
 updatedb
