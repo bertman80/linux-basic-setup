@@ -10,3 +10,10 @@ externalip=$(curl ifconfig.me)
 internalip=$(hostname -I | awk '{print $1}')
 echo "start de webbrowser"
 echo "http://$internalip/info.php"
+
+echo "### FireWall ###" 
+sudo apt install ufw
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw enable
