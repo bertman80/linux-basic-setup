@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
 #curl -L https://raw.githubusercontent.com/bertman80/linux-basic-setup/main/wordpress-server.sh | bash
-internsubnet=192.168.178.0/24
+read -p "LAN ip-range (192.168.178.0/24): " internsubnet
+read -p "Website name: " websitename
+if [ websitename == "" ] then 
+  $websitename = "test.nl"
+fi
+if [ internsubnet == "" ] then 
+  $internsubnet = "192.168.178.0/24"
+fi
+
+echo $websitename
+echo $internsubnet
+
+read -p "ff wachten" est
+
+#internsubnet=192.168.178.0/24
 wordpress_url="https://nl.wordpress.org/latest-nl_NL.zip"
 
 echo "### Apache WebServer Installeren ###"
@@ -23,7 +37,7 @@ fi
 wpconfig=/etc/apache2/sites-enabled/wordpress.conf
 if [ ! -f "$wpconfig" ]; then
   cp /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/wordpress.conf
-  sed -i 's/<VirtualHost *:80>/<VirtualHost *:8080>/' /etc/apache2/sites-enabled/000-default.conf
+  sed -i 's/:80/:8080/' /etc/apache2/sites-enabled/000-default.conf
 fi
 sudo service apache2 restart
 
