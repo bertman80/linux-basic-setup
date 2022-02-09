@@ -14,8 +14,8 @@ internalip=$(hostname -I | awk '{print $1}')
 #echo "start de webbrowser"
 #echo "http://$internalip/info.php"
 
-wpdir=/var/www/wordpress
-if [ ! -f "$WPDIR" ]; then
+wpdir=/var/www/wordpress/
+if [ ! -f "$wpdir" ]; then
   curl -o /tmp/wp.zip $wordpress_url
   unzip /tmp/wp.zip -d /var/www
 fi
