@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#curl -L https://raw.githubusercontent.com/bertman80/linux-basic-setup/main/lamp-server.sh | bash
+#curl -L https://raw.githubusercontent.com/bertman80/linux-basic-setup/main/wordpress-server.sh | bash
 internsubnet=192.168.178.0/24
 wordpress_url="https://nl.wordpress.org/latest-nl_NL.zip"
 
@@ -15,7 +15,7 @@ internalip=$(hostname -I | awk '{print $1}')
 #echo "http://$internalip/info.php"
 
 wpdir=/var/www/wordpress
-if [ ! -f "$wpdir" ]; then
+if [ ! -f "$WPDIR" ]; then
   curl -o /tmp/wp.zip $wordpress_url
   unzip /tmp/wp.zip -d /var/www
 fi
