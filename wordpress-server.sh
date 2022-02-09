@@ -3,10 +3,10 @@
 read -p "LAN ip-range (192.168.178.0/24): " internsubnet
 read -p "Website name: " websitename
 if [ websitename == "" ]; then 
-  websitename = "test.nl"
+  websitename="test.nl"
 fi
 if [ internsubnet == "" ]; then 
-  internsubnet = "192.168.178.0/24"
+  internsubnet="192.168.178.0/24"
 fi
 
 echo $websitename
