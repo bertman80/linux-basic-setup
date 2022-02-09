@@ -11,14 +11,22 @@ echo "<?php phpinfo(); ?>" > /var/www/html/info.php
 
 externalip=$(curl ifconfig.me)
 internalip=$(hostname -I | awk '{print $1}')
-echo "start de webbrowser"
-echo "http://$internalip/info.php"
+#echo "start de webbrowser"
+#echo "http://$internalip/info.php"
 
 wpdir=/var/www/wordpress
 if [ ! -f "$wpdir" ]; then
   curl -o /tmp/wp.zip $wordpress_url
   unzip /tmp/wp.zip -d /var/www
 fi
+
+wpconfig=/etc/apache2/sites-enabled/wordpress.conf
+if [ ! -f "$wpconfig" ]; then
+  cp /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/wordpress.conf
+  sed -i 's/<VirtualHost *:80>/<VirtualHost *:8080>/' /etc/apache2/sites-enabled/000-default.conf
+fi
+sudo service apache2 restart
+
 
 echo "### FireWall ###" 
 sudo apt install ufw
