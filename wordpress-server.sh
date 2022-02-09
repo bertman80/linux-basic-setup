@@ -30,7 +30,7 @@ fi
 wpconfig=/etc/apache2/sites-enabled/wordpress.conf
 if [ ! -f "$wpconfig" ]; then
   cp /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/wordpress.conf
-  sed -i 's/:80/:8080/p' /etc/apache2/sites-enabled/000-default.conf
+  sed -i 's#:80>#:8080>#' /etc/apache2/sites-enabled/000-default.conf
   sed -i 's#/var/www/html#/var/www/wordpress#' /etc/apache2/sites-enabled/wordpress.conf
   sed -i 's#ServerAdmin webmaster@localhost#ServerName http://$websitename \n\t ServerAlias http://www.$websitename \n\t ServerAdmin webmaster@localhost#' /etc/apache2/sites-enabled/wordpress.conf
   sed -i 's#<VirtualHost#  <directory /var/www/wordpress> \n\t require all granted \n </directory> \n <VirtualHost#' /etc/apache2/sites-enabled/wordpress.conf
