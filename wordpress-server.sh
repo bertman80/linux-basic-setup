@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#curl -L https://raw.githubusercontent.com/bertman80/linux-basic-setup/main/lamp-server.txt | bash
+#curl -L https://raw.githubusercontent.com/bertman80/linux-basic-setup/main/lamp-server.sh | bash
 internsubnet=192.168.178.0/24
 wordpress_url="https://nl.wordpress.org/latest-nl_NL.zip"
 
@@ -19,10 +19,9 @@ curl -o /var/www/html/wp.zip $wordpress_url
 echo "### FireWall ###" 
 sudo apt install ufw
 # ssh alleen van intern
-#ufw allow from $internsubnet to any app ssh
+ufw allow from $internsubnet to any app ssh
 # website overal te benaderen
-ufw allow from $internsubnet to any app www
-#ufw allow from any to any app www
+ufw allow from any to any app www
 sudo ufw enable
 # show rules
 sudo ufw status numbered
