@@ -13,7 +13,8 @@ echo "http://$internalip/info.php"
 
 echo "### FireWall ###" 
 sudo apt install ufw
-sudo ufw allow ssh
-sudo ufw allow http
-sudo ufw allow https
+# ssh alleen van intern
+ufw allow from 192.168.178.0/24 to any app ssh
+# website overal te benaderen
+ufw allow from any to any app www
 sudo ufw enable
