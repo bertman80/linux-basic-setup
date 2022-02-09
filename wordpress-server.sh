@@ -2,12 +2,10 @@
 #curl -L https://raw.githubusercontent.com/bertman80/linux-basic-setup/main/wordpress-server.sh | bash
 read -p "LAN ip-range (192.168.178.0/24): " internsubnet
 read -p "Website name: " websitename
-if [[ websitename == "" ]]
-then 
+if [[ websitename = "" ]] then 
   websitename="test.nl"
 fi
-if [[ internsubnet == "" ]]
-then 
+if [[ internsubnet = "" ]] then 
   internsubnet="192.168.178.0/24"
 fi
 
