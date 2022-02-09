@@ -14,7 +14,7 @@ internalip=$(hostname -I | awk '{print $1}')
 echo "start de webbrowser"
 echo "http://$internalip/info.php"
 
-curl -o "/var/www/html/wp.zip" $wordpress_url
+curl -o /tmp/wp.zip $wordpress_url
 
 echo "### FireWall ###" 
 sudo apt install ufw
