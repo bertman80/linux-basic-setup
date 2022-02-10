@@ -26,7 +26,7 @@ wpdir=/var/www/$websitename/
 if [ ! -d "$wpdir" ]; then
   curl -o /tmp/wp.zip $wordpress_url
   unzip /tmp/wp.zip -d /var/www
-  mv /tmp/wordpress /var/www/$websitename
+  mv /var/www/wordpress /var/www/$websitename
   chown -R www-data:www-data /var/www/$websitename
 fi
 
