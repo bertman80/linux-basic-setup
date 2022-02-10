@@ -22,19 +22,21 @@ echo ""
 externalip=$(curl ifconfig.me)
 internalip=$(hostname -I | awk '{print $1}')
 
-wpdir=/var/www/wordpress/
+wpdir=/var/www/$websitename/
 if [ ! -d "$wpdir" ]; then
   curl -o /tmp/wp.zip $wordpress_url
   unzip /tmp/wp.zip -d /var/www
+  mv /tmp/wordpress /var/www/$websitename
+  chown -R www-data:www-data /var/www/$websitename
 fi
 
-wpconfig=/etc/apache2/sites-enabled/wordpress.conf
+wpconfig=/etc/apache2/sites-enabled/$websitename.conf
 if [ ! -f "$wpconfig" ]; then
-  cp /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/wordpress.conf
+  cp /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/$websitename.conf
   sed -i 's#:80>#:8080>#' /etc/apache2/sites-enabled/000-default.conf
-  sed -i 's#/var/www/html#/var/www/wordpress#' /etc/apache2/sites-enabled/wordpress.conf
-  sed -i "s#ServerAdmin webmaster@localhost#ServerName http://$websitename \n\t ServerAlias http://www.$websitename \n\t ServerAdmin webmaster@localhost#" /etc/apache2/sites-enabled/wordpress.conf
-  sed -i "s#<VirtualHost#  <directory /var/www/wordpress> \n\t require all granted \n </directory> \n <VirtualHost#" /etc/apache2/sites-enabled/wordpress.conf
+  sed -i 's#/var/www/html#/var/www/wordpress#' /etc/apache2/sites-enabled/$websitename.conf
+  sed -i "s#ServerAdmin webmaster@localhost#ServerName http://$websitename \n\t ServerAlias http://www.$websitename \n\t ServerAdmin webmaster@localhost#" /etc/apache2/sites-enabled/$websitename.conf
+  sed -i "s#<VirtualHost#  <directory /var/www/$websitename> \n\t require all granted \n </directory> \n <VirtualHost#" /etc/apache2/sites-enabled/$websitename.conf
 #  sed -i 's#:80>#:8080>#' /etc/apache2/sites-enabled/000-default.conf
 #  sed -i 's#/var/www/html#/var/www/wordpress#' /etc/apache2/sites-enabled/wordpress.conf
 #  sed -i 's#ServerAdmin webmaster@localhost#ServerName http://$websitename \n\t ServerAlias http://www.$websitename \n\t ServerAdmin webmaster@localhost#' /etc/apache2/sites-enabled/wordpress.conf
@@ -63,3 +65,23 @@ echo "####################################"
 echo ""
 
 sudo mysql -u root  
+echo "Onderstaande moet je zelf in SQL doen."  
+echo "Je moet alleen de USER en PASSWORD aanpassen."
+echo ""
+echo "CREATE DATABASE wordpress;"
+echo "GRANT ALL ON wordpress.* TO 'wordpressuser' IDENTIFIED BY 'Secure1234!';"
+echo "quit"
+echo ""
+echo "mysql_secure_installation"
+echo ""
+echo "Pas php.ini aan"
+echo ""
+echo "/etc/php/<VERSION>/apache2/php.ini"
+echo ""
+echo "max\_input\_time = 30"
+echo "upload\_max\_filesize = 20M"
+echo "post\_max\_size = 21M"
+echo ""
+echo "Herstart apache"
+echo ""
+echo "service apache2 restart"
