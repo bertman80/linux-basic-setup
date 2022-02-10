@@ -63,8 +63,6 @@ echo "####################################"
 echo "###             SQL              ###" 
 echo "####################################"
 echo ""
-
-sudo mysql -u root  
 echo "Onderstaande moet je zelf in SQL doen."  
 echo "Je moet alleen de USER en PASSWORD aanpassen."
 echo ""
@@ -85,3 +83,4 @@ echo ""
 echo "Herstart apache"
 echo ""
 echo "service apache2 restart"
+sudo mysql -u root
