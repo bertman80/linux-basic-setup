@@ -4,16 +4,10 @@
 #read -p "Website name: " websitename # werkt alleen als script offline staat
 websitename="trebnie.nl"
 internsubnet="192.168.178.0/24"
-#if [ !websitename  ]; then 
-#  websitename="test.nl"
-#fi
-#if [ !internsubnet ]; then 
-#  internsubnet="192.168.178.0/24"
-#fi
 wordpress_url="https://nl.wordpress.org/latest-nl_NL.zip"
 echo ""
 echo "####################################"
-echo "### Apache WebServer Installeren ###"
+echo "###       LAMP Installeren       ###"
 echo "####################################"
 echo ""
 sudo apt-get install apache2 php mariadb-server php-mysql -y
@@ -61,3 +55,11 @@ sudo ufw enable
 # show rules
 sudo ufw status numbered
 
+
+echo ""
+echo "####################################"
+echo "###             SQL              ###" 
+echo "####################################"
+echo ""
+
+sudo mysql -u root  
