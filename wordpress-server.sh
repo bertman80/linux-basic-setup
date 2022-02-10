@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #curl -L https://raw.githubusercontent.com/bertman80/linux-basic-setup/main/wordpress-server.sh | bash
-read -p "LAN ip-range (192.168.178.0/24): " internsubnet
-read -p "Website name: " websitename
+read -p "LAN ip-range (192.168.178.0/24): " internsubnet # werkt alleen als script offline staat
+read -p "Website name: " websitename # werkt alleen als script offline staat
 if [ !websitename  ]; then 
   websitename="test.nl"
 fi
@@ -9,8 +9,10 @@ if [ !internsubnet ]; then
   internsubnet="192.168.178.0/24"
 fi
 wordpress_url="https://nl.wordpress.org/latest-nl_NL.zip"
-
+echo $websitename
+echo "####################################"
 echo "### Apache WebServer Installeren ###"
+echo "####################################"
 
 sudo apt-get install apache2 php mariadb-server php-mysql -y
 sudo service apache2 restart
@@ -37,8 +39,9 @@ if [ ! -f "$wpconfig" ]; then
 fi
 sudo service apache2 restart
 
-
-echo "### FireWall ###" 
+echo "####################################"
+echo "###           FireWall           ###" 
+echo "####################################"
 sudo apt install ufw
 # ssh alleen van intern
 ufw allow from $internsubnet to any app ssh
