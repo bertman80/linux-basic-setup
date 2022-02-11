@@ -10,7 +10,7 @@ echo "####################################"
 echo "###       LAMP Installeren       ###"
 echo "####################################"
 echo ""
-sudo apt-get install apache2 php mariadb-server php-mysql php-xml -y 
+sudo apt-get install apache2 php mariadb-server php-mysql php-xml php-mbstring -y 
 sudo service apache2 restart
 echo "<?php phpinfo(); ?>" > /var/www/html/info.php
 
