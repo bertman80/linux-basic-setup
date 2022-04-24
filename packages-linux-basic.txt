@@ -8,3 +8,4 @@ r-base
 r-recommended
 nmap
 neofetch
+remmina
