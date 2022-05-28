@@ -4,6 +4,7 @@ locate
 python3
 python3-matplotlib
 htop
+bashtop
 r-base
 r-recommended
 nmap
