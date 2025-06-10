@@ -11,3 +11,10 @@ Make a github basic dir, run this script with sydo su to get the all the rights<
 <code>./install.sh</code><br>
 <code>exit</code><br>
 <br>
+
+# update.sh
+plaats dit script in /opt/update.sh<br>
+maak hem uitvoerbaar: <code>chmod +x /opt/update.sh</code><br>
+als je deze automatisch laten uitvoeren b.v. op zondag ochtend om 7:00 <br>
+voeg deze dan toe aan crontab -e<br>
+<code>0 7 * * 0 /opt/update.sh</code>
