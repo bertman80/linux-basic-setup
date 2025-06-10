@@ -1,5 +1,6 @@
 #!/bin/bash
 # elke zondag om 7 uur laten installeren: crontab -e = 0 7 * * 0 /opt/update.sh
+# hij maakt een log file met wat hij heeft gedaan in /var/log/system_update_$TIMESTAMP.log
 
 # Definieer de logbestandsnaam met een tijdstempel
 TIMESTAMP=$(date +"%G-week%V")
