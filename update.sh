@@ -1,6 +1,11 @@
 #!/bin/bash
 # elke zondag om 7 uur laten installeren: crontab -e = 0 7 * * 0 /opt/update.sh
 # hij maakt een log file met wat hij heeft gedaan in /var/log/system_update_$TIMESTAMP.log
+# je hebt voldoende rechten nodig (root) om os en applicaties updates te installeren
+# zet dit bestand in b.v. /opt
+# zet rechten: chmod +x /opt/update.sh
+# login met root of doe een sudo ./update.sh
+# met de hand uitvoeren sudo ./update.sh
 
 # Definieer de logbestandsnaam met een tijdstempel
 TIMESTAMP=$(date +"%G-week%V")
@@ -17,22 +22,22 @@ log "Start systeemupdate en upgrade..."
 if command -v apt &> /dev/null
 then
     log "Apt-gebaseerd systeem gedetecteerd. Updaten met apt..."
-    sudo apt update >> "$LOGFILE" 2>&1
-    sudo DEBIAN_FRONTEND=noninteractive apt -o Dpkg::Options::="--force-confdef" \
+    apt update >> "$LOGFILE" 2>&1
+    DEBIAN_FRONTEND=noninteractive apt -o Dpkg::Options::="--force-confdef" \
          -o Dpkg::Options::="--force-confold" upgrade -y >> "$LOGFILE" 2>&1
-    sudo apt autoremove -y >> "$LOGFILE" 2>&1
+    apt autoremove -y >> "$LOGFILE" 2>&1
     log "Apt update en upgrade voltooid."
 elif command -v yum &> /dev/null
 then
     log "Yum-gebaseerd systeem gedetecteerd. Updaten met yum..."
-    sudo yum check-update >> "$LOGFILE" 2>&1
-    sudo yum update -y >> "$LOGFILE" 2>&1
+    yum check-update >> "$LOGFILE" 2>&1
+    yum update -y >> "$LOGFILE" 2>&1
     log "Yum update en upgrade voltooid."
 elif command -v dnf &> /dev/null
 then
     log "DNF-gebaseerd systeem gedetecteerd (moderne Fedora/RHEL). Updaten met dnf..."
-    sudo dnf check-update >> "$LOGFILE" 2>&1
-    sudo dnf upgrade -y >> "$LOGFILE" 2>&1
+    dnf check-update >> "$LOGFILE" 2>&1
+    dnf upgrade -y >> "$LOGFILE" 2>&1
     log "DNF update en upgrade voltooid."
 else
     log "Geen ondersteund pakketbeheersysteem (apt, yum, dnf) gevonden."
@@ -45,9 +50,7 @@ log "Controleer op Pi-hole installatie en update..."
 if command -v pihole &> /dev/null
 then
     log "Pi-hole installatie gedetecteerd. Start Pi-hole update..."
-														
-																	 
-    sudo pihole -up -y >> "$LOGFILE" 2>&1
+    pihole -up -y >> "$LOGFILE" 2>&1
     log "Pi-hole update voltooid."
 else
     log "Pi-hole niet gedetecteerd of de 'pihole' command is niet beschikbaar in PATH."
